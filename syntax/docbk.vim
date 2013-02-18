@@ -2,7 +2,7 @@
 " Language:	DocBook
 " Maintainer:	Devin Weaver <vim@tritarget.com>
 " URL:		https://github.com/sukima/vim-docbk
-" Version:	1.2.1
+" Version:	1.3.0
 " Thanks to Johannes Zellner <johannes@zellner.org> for the default to XML
 " suggestion.
 
