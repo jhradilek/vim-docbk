@@ -2,7 +2,7 @@
 
 ## Description
 
-The **vim-docbk** repository provides a collection of syntax files for the DocBook XML language.
+The **vim-docbk** repository provides a collection of syntax files for the DocBook XML language. See also my [vim-snippets](https://github.com/jhradilek/vim-snippets) repository for snippets for this language.
 
 ## Installation
 
