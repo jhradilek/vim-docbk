@@ -159,12 +159,12 @@ if 'sgml' == b:docbk_type
   syn region docbkRemark start="<comment>"lc=9     end="</comment>"me=e-10    contains=sgmlRegion,sgmlEntity,@Spell keepend
   syn region docbkCite   start="<citation>"lc=10   end="</citation>"me=e-11   contains=sgmlRegion,sgmlEntity,@Spell keepend
 else
-  syn region docbkRegion start="<emphasis\>"       end="</emphasis>"me=e-11   contains=xmlTag,xmlNamespace,xmlTagName,xmlEndTag,xmlRegion,xmlEntity,@Spell keepend
-  syn region docbkTitle  start="<title\>"          end="</title>"me=e-8       contains=xmlTag,xmlNamespace,xmlTagName,xmlEndTag,xmlRegion,xmlEntity,@Spell keepend
-  syn region docbkTitle  start="<bridgehead\>"     end="</bridgehead>"me=e-13 contains=xmlTag,xmlNamespace,xmlTagName,xmlEndTag,xmlRegion,xmlEntity,@Spell keepend
-  syn region docbkRemark start="<remark\>"         end="</remark>"me=e-9      contains=xmlTag,xmlNamespace,xmlTagName,xmlEndTag,xmlRegion,xmlEntity,@Spell keepend
-  syn region docbkRemark start="<comment\>"        end="</comment>"me=e-10    contains=xmlTag,xmlNamespace,xmlTagName,xmlEndTag,xmlRegion,xmlEntity,@Spell keepend
-  syn region docbkCite   start="<citation\>"       end="</citation>"me=e-11   contains=xmlTag,xmlNamespace,xmlTagName,xmlEndTag,xmlRegion,xmlEntity,@Spell keepend
+  syn region docbkRegion start="<emphasis\>"       end="</emphasis>"me=e-11   contains=xmlTag,xmlNamespace,xmlTagName,xmlEndTag,xmlRegion,xmlEntity,xmlComment,xmlTodo,@Spell keepend
+  syn region docbkTitle  start="<title\>"          end="</title>"me=e-8       contains=xmlTag,xmlNamespace,xmlTagName,xmlEndTag,xmlRegion,xmlEntity,xmlComment,xmlTodo,@Spell keepend
+  syn region docbkTitle  start="<bridgehead\>"     end="</bridgehead>"me=e-13 contains=xmlTag,xmlNamespace,xmlTagName,xmlEndTag,xmlRegion,xmlEntity,xmlComment,xmlTodo,@Spell keepend
+  syn region docbkRemark start="<remark\>"         end="</remark>"me=e-9      contains=xmlTag,xmlNamespace,xmlTagName,xmlEndTag,xmlRegion,xmlEntity,xmlComment,xmlTodo,@Spell keepend
+  syn region docbkRemark start="<comment\>"        end="</comment>"me=e-10    contains=xmlTag,xmlNamespace,xmlTagName,xmlEndTag,xmlRegion,xmlEntity,xmlComment,xmlTodo,@Spell keepend
+  syn region docbkCite   start="<citation\>"       end="</citation>"me=e-11   contains=xmlTag,xmlNamespace,xmlTagName,xmlEndTag,xmlRegion,xmlEntity,xmlComment,xmlTodo,@Spell keepend
 endif
 
 " Define the default highlighting.
