@@ -2,22 +2,31 @@
 " Language:    DocBook
 " Maintainer:  Jaromir Hradilek <jhradilek@gmail.com>
 " URL:         https://github.com/jhradilek/vim-docbk
-" Last Change: 1 April 2013
+" Last Change: 25 November 2013
 " Description: A filetype plugin file for the DocBook markup language.
 
-" Only run a filetype plugin once for the buffer:
-if exists('b:did_ftplugin') | finish | endif
+" Run this plugin only once for the current buffer:
+if exists('b:did_ftplugin')
+  finish
+endif
 
-" Detect the DocBook format:
+" Save the compatibility options to avoid problems in compatible mode:
+let s:save_cpo = &cpo
+set cpo&vim
+
+" Determine the DocBook format:
 if !exists('b:docbk_type')
+  " Check the file extension of the current buffer:
   if expand('%:e') == 'sgml'
+    " Set the DocBook type to SGML:
     let b:docbk_type = 'sgml'
   else
+    " Set the DocBook type to XML:
     let b:docbk_type = 'xml'
   endif
 endif
 
-" Detect the DocBook version:
+" Determine the DocBook version:
 if !exists('b:docbk_ver')
   if exists('docbk_ver')
     let b:docbk_ver = docbk_ver
@@ -28,18 +37,16 @@ endif
 
 " Change the configuration:
 if b:docbk_type == 'sgml'
-  " Behave just like SGML:
+  " Load the filetype plugin file for the SGML language:
   runtime! ftplugin/sgml.vim ftplugin/sgml_*.vim ftplugin/sgml/*.vim
 else
-  " Behave just like XML:
+  " Load the filetype plugin file for the XML language:
   runtime! ftplugin/xml.vim ftplugin/xml_*.vim ftplugin/xml/*.vim
 
-  " Save the compatibility options to avoid problems in compatible mode:
-  let s:save_cpo = &cpo
-  set cpo&vim
-
-  " Make sure omni completion is supported and :XMLns is defined:
+  " Verify that omni completion is supported and the :XMLns command
+  " is defined:
   if exists('&omnifunc') && exists(':XMLns')
+    " Check the DocBook version:
     if b:docbk_ver == 5
       " Enable omni completion for DocBook 5.0:
       XMLns docbook50
@@ -48,8 +55,8 @@ else
       XMLns docbook45
     endif
   endif
-
-  " Restore the compatibility options:
-  let &cpo = s:save_cpo
-  unlet s:save_cpo
 endif
+
+" Restore the compatibility options:
+let &cpo = s:save_cpo
+unlet s:save_cpo
