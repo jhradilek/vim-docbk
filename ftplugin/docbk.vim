@@ -2,7 +2,7 @@
 " Language:    DocBook
 " Maintainer:  Jaromir Hradilek <jhradilek@gmail.com>
 " URL:         https://github.com/jhradilek/vim-docbk
-" Last Change: 25 November 2013
+" Last Change: 01 April 2015
 " Description: A filetype plugin file for the DocBook markup language.
 
 " Run this plugin only once for the current buffer:
@@ -14,7 +14,7 @@ endif
 let s:save_cpo = &cpo
 set cpo&vim
 
-" Determine the DocBook format:
+" Determine the DocBook type:
 if !exists('b:docbk_type')
   " Check the file extension of the current buffer:
   if expand('%:e') == 'sgml'
@@ -28,9 +28,12 @@ endif
 
 " Determine the DocBook version:
 if !exists('b:docbk_ver')
+  " Check whether the DocBook version is already specified:
   if exists('docbk_ver')
+    " Use the selected version of DocBook:
     let b:docbk_ver = docbk_ver
   else
+    " Use DocBook 4.5 by default:
     let b:docbk_ver = 4
   endif
 endif

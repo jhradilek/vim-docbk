@@ -1,32 +1,36 @@
 " Vim syntax file
-" Language:	DocBook
-" Maintainer:	Devin Weaver <vim@tritarget.com>
-" URL:		https://github.com/sukima/vim-docbk
-" Version:	1.3.0
-" Thanks to Johannes Zellner <johannes@zellner.org> for the default to XML
-" suggestion.
+" Language:    DocBook
+" Author:      Devin Weaver <vim@tritarget.com>
+" Maintainer:  Jaromir Hradilek <jhradilek@gmail.com>
+" URL:         https://github.com/jhradilek/vim-docbk
+" Last Change: 01 April 2015
+" Description: A syntax file for the DocBook markup language.
 
-" REFERENCES:
-"   http://docbook.org/
-"   http://www.open-oasis.org/docbook/
+" Thanks to:
 "
+"   - Johannes Zellner <johannes@zellner.org> for his suggestion to default
+"     to XML
+"   - Rory Hunter <roryh@dcs.ed.ac.uk> for his suggestion to add special
+"     emphasis on some regions.
 
-" For version 5.x: Clear all syntax items
-" For version 6.x: Quit when a syntax file was already loaded
-if version < 600
-  syntax clear
-elseif exists("b:current_syntax")
+" Run this plugin only once for the current buffer:
+if exists("b:current_syntax")
   finish
 endif
 
-" Auto detect added by Bram Moolenaar
+" Determine the DocBook type, added by Bram Moolenaar:
 if !exists('b:docbk_type')
+  " Check the file extension of the current buffer:
   if expand('%:e') == "sgml"
+    " Set the DocBook type to SGML:
     let b:docbk_type = 'sgml'
   else
+    " Set the DocBook type to XML:
     let b:docbk_type = 'xml'
   endif
 endif
+
+" Configure syntax highlighting:
 if 'xml' == b:docbk_type
     doau Syntax xml
     syn cluster xmlTagHook add=docbkKeyword
@@ -42,7 +46,7 @@ endif
 " Enable spell checking.
 syn spell toplevel
 
-" The following elements are valid in DocBook 5.0:
+" Define elements that are valid in DocBook 5.0:
 syn keyword docbkKeyword abbrev abstract accel acknowledgements contained
 syn keyword docbkKeyword acronym address affiliation alt anchor contained
 syn keyword docbkKeyword annotation answer appendix application arc contained
@@ -128,7 +132,7 @@ syn keyword docbkKeyword userinput varargs variablelist varlistentry contained
 syn keyword docbkKeyword varname videodata videoobject void volumenum contained
 syn keyword docbkKeyword warning wordasword xref year contained
 
-" The following elements were valid in DocBook 4.5 and are kept for backwards compatibility:
+" Define elements that are valid in DocBook 4.5:
 syn keyword docbkKeyword ackno action appendixinfo articleinfo contained
 syn keyword docbkKeyword authorblurb beginpage bibliographyinfo contained
 syn keyword docbkKeyword blockinfo bookinfo chapterinfo collabname contained
@@ -146,11 +150,12 @@ syn keyword docbkKeyword sidebarinfo structfield structname tocback contained
 syn keyword docbkKeyword tocchap tocfront toclevel1 toclevel2 contained
 syn keyword docbkKeyword toclevel3 toclevel4 toclevel5 tocpart ulink contained
 
-" The following elements were already renamed or removed in DocBook 4.5, but are kept for backwards compatibility:
+" Define elements that were already renamed or removed in DocBook 4.5, but
+" are kept for backwards compatibility:
 syn keyword docbkKeyword artheader bookbiblio comment docinfo contained
 syn keyword docbkKeyword interfacedefinition seriesinfo contained
 
-" Add special emphasis on some regions. Thanks to Rory Hunter <roryh@dcs.ed.ac.uk> for these ideas.
+" Add special emphasis on some regions:
 if 'sgml' == b:docbk_type
   syn region docbkRegion start="<emphasis>"lc=10   end="</emphasis>"me=e-11   contains=sgmlRegion,sgmlEntity,@Spell keepend
   syn region docbkTitle  start="<title>"lc=7       end="</title>"me=e-8       contains=sgmlRegion,sgmlEntity,@Spell keepend
@@ -167,28 +172,13 @@ else
   syn region docbkCite   start="<citation\>"       end="</citation>"me=e-11   contains=xmlTag,xmlNamespace,xmlTagName,xmlEndTag,xmlRegion,xmlEntity,xmlComment,xmlTodo,@Spell keepend
 endif
 
-" Define the default highlighting.
-" For version 5.7 and earlier: only when not done already
-" For version 5.8 and later: only when an item doesn't have highlighting yet
-if version >= 508 || !exists("did_docbk_syn_inits")
-  if version < 508
-    let did_docbk_syn_inits = 1
-    command -nargs=+ HiLink hi link <args>
-    hi DocbkBold term=bold cterm=bold gui=bold
-  else
-    command -nargs=+ HiLink hi def link <args>
-    hi def DocbkBold term=bold cterm=bold gui=bold
-  endif
+" Define the default syntax highlighting
+hi def link docbkKeyword   Statement
+hi def link docbkRegion    DocbkBold
+hi def link docbkTitle     Title
+hi def link docbkRemark    Comment
+hi def link docbkCite      Constant
+hi def DocbkBold term=bold cterm=bold gui=bold
 
-  HiLink docbkKeyword	Statement
-  HiLink docbkRegion	DocbkBold
-  HiLink docbkTitle	Title
-  HiLink docbkRemark	Comment
-  HiLink docbkCite	Constant
-
-  delcommand HiLink
-endif
-
+" Define the name of this syntax:
 let b:current_syntax = "docbk"
-
-" vim: ts=8
