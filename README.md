@@ -58,7 +58,7 @@ For more information on how to enable and configure syntax highlighting in Vim, 
 
 ## Copyright
 
-Copyright © 2013 Jaromir Hradilek  
+Copyright © 2013, 2015 Jaromir Hradilek  
 Copyright © 2005, 2013 Devin Weaver
 
 This program is free software; see the source for copying conditions. It is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
