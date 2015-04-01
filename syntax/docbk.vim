@@ -33,8 +33,13 @@ endif
 " Configure syntax highlighting:
 if 'xml' == b:docbk_type
     doau Syntax xml
+
+    syn region  xmlString contained start=+"+ end=+"+ contains=xmlEntity,@NoSpell display
+    syn region  xmlString contained start=+'+ end=+'+ contains=xmlEntity,@NoSpell display
+
     syn cluster xmlTagHook add=docbkKeyword
     syn cluster xmlRegionHook add=docbkRegion,docbkTitle,docbkRemark,docbkCite
+
     syn case match
 elseif 'sgml' == b:docbk_type
     doau Syntax sgml
